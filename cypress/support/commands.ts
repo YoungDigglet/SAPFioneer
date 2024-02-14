@@ -6,7 +6,7 @@ declare namespace Cypress {
         getElementByType(elementType: string): Chainable<JQuery<HTMLElement>>
         getElementFromHeader(elementName: string, subElementName: string): Chainable<JQuery<HTMLElement>>
         sendTextToIframeElement(iframeId: string, spanName: string): Chainable<JQuery<HTMLElement>>
-        checkLabelAlert(iframeId1: string, spanName1: string): Chainable<JQuery<HTMLElement>>
+        checkLabelAlert(iframeId1: string, labelText: string): Chainable<JQuery<HTMLElement>>
     }
 }
 
@@ -33,10 +33,10 @@ declare namespace Cypress {
         })
     })
 
-        Cypress.Commands.add("checkLabelAlert", (iframeId1, spanName1) => {
+        Cypress.Commands.add("checkLabelAlert", (iframeId, labelText) => {
             cy.wait(500);
-            cy.getElementById(`${iframeId1}`).then(($iframe) => {
-                cy.wrap($iframe.contents().find('body').first()).contains('label', `${spanName1}`);
+            cy.getElementById(`${iframeId}`).then(($iframe) => {
+                cy.wrap($iframe.contents().find('body').first()).contains('label', `${labelText}`);
             })
         })
 
